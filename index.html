@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nithin Raj Chanda - Portfolio</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --sidebar-bg: #0a192f;
+            --primary-color: #ccd6f6;
+            --secondary-color: #8892b0;
+            --accent-color: #64ffda;
+            --dark-bg: #112240;
+            --card-bg: #1e2d4a;
+            --hover-color: rgba(100, 255, 218, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--sidebar-bg);
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+            padding-top: 80px; /* Account for fixed navbar */
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--sidebar-bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 10px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            padding: 15px 20px;
+            transition: all 0.3s ease;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1100;
+        }
+        .navbar-brand {
+            color: var(--accent-color);
+            font-weight: 700;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .navbar-brand:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        .navbar-nav .nav-link {
+            color: var(--primary-color);
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .navbar-nav .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            right: 15px;
+            height: 2px;
+            background-color: var(--accent-color);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: var(--accent-color);
+        }
+        .navbar-nav .nav-link:hover::after {
+            transform: scaleX(1);
+        }
+        .navbar-nav .nav-link.active {
+            color: var(--accent-color);
+        }
+        .navbar-nav .nav-link.active::after {
+            transform: scaleX(1);
+        }
+        .navbar-toggler {
+            border: none;
+            color: var(--accent-color);
+            font-size: 1.5rem;
+        }
+        .navbar-toggler:focus {
+            outline: none;
+        }
+
+        /* Page Layout */
+        .page-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background: linear-gradient(to bottom, var(--sidebar-bg), var(--dark-bg));
+            padding: 2rem 1.5rem;
+            box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            width: 350px;
+            height: 100vh;
+            position: sticky;
+            top: 80px; /* Adjusted for navbar */
+            border-right: 1px solid rgba(100, 255, 218, 0.1);
+            overflow-y: visible;
+            padding-bottom: 3rem;
+        }
+
+        /* Profile Section */
+        /* Added animate__ classes in the HTML below */
+        .profile-img-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+        }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 4px solid var(--accent-color);
+            transition: all 0.5s ease;
+            object-fit: cover;
+        }
+        .profile-img-container:hover .profile-img {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--accent-color);
+        }
+        .profile-img-container::after {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            70% {
+                transform: scale(1.05);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+
+        .name-title h1 {
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .name-title p {
+            color: var(--secondary-color);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        /* Card Glass Style */
+        .card-glass {
+            background: rgba(30, 45, 74, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        .card-glass:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--accent-color);
+        }
+        .card-glass h3 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+            font-weight: 600;
+        }
+        .card-glass h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 50px;
+            background: var(--accent-color);
+        }
+        .skills-list {
+            columns: 2;
+            column-gap: 1.5rem;
+            list-style: none;
+            padding-left: 0.5rem;
+        }
+        .skills-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        .skills-list li:before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        .skills-list li:hover {
+            color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        /* Main Content */
+        /* We'll add animate__ classes to .section-card, etc. in the HTML */
+        .main-content {
+            flex: 1;
+            padding: 3rem 2rem;
+            max-width: calc(100% - 350px);
+        }
+        .achievement-highlight:hover {
+            background-color: #1e2d4a; /* Lighten/darken to your taste */
+            transform: translateX(5px);
+        }
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--accent-color), transparent);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+        .section-card:hover::before {
+            transform: scaleX(1);
+        }
+        .section-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(100, 255, 218, 0.2);
+        }
+        .achievement-highlight {
+            /* Teal border on the left */
+            border-left: 4px solid var(--accent-color);
+
+            /* Optional: tweak background color if needed */
+            background: #112240; /* or keep the .section-card background */
+
+            /* Extra padding if desired */
+            padding: 1rem 1.5rem;
+
+            /* Slight offset or spacing from other content */
+            margin: 1rem 0;
+
+            /* Optionally, a subtle transform or border radius difference */
+            border-radius: 0 6px 6px 0;
+
+            /* Hover effect (optional) */
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .section-card h2 {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        .section-card h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-color);
+        }
+        .section-card h2 i {
+            margin-right: 10px;
+        }
+
+        /* Timeline Items */
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 2.5rem;
+            border-left: 3px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+        .timeline-item:hover {
+            transform: translateX(5px);
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -10px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        .timeline-item:hover::before {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* Text color overrides */
+        .timeline-item h4,
+        .timeline-item h5 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .text-muted {
+            color: var(--secondary-color) !important;
+        }
+        .timeline-item ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        .timeline-item ul li {
+            color: var(--secondary-color);
+            margin-bottom: 5px;
+        }
+
+        /* Projects Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: var(--dark-bg);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-color);
+        }
+        .card-body {
+            padding: 1.5rem;
+        }
+        .card-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+        .card ul {
+            padding-left: 20px;
+            color: var(--secondary-color);
+        }
+        .card ul li {
+            margin-bottom: 8px;
+        }
+
+        /* Additional Elements */
+        .lead {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--secondary-color);
+        }
+        .skill-badge {
+            display: inline-block;
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-color);
+            border-radius: 15px;
+            padding: 5px 10px;
+            margin: 5px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        .skill-badge:hover {
+            background: rgba(100, 255, 218, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .award-highlight {
+            border-left: 3px solid var(--accent-color);
+            padding-left: 15px;
+            margin: 15px 0;
+            background: rgba(100, 255, 218, 0.05);
+            padding: 15px;
+            border-radius: 0 5px 5px 0;
+            transition: all 0.3s ease;
+        }
+        .award-highlight:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateX(5px);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(to top, var(--dark-bg), var(--sidebar-bg));
+            padding: 3rem 0;
+            width: 100%;
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            margin-top: 2rem;
+        }
+
+        .footer-card-glass {
+            background: rgba(30, 45, 74, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .footer-card-glass:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--accent-color);
+        }
+        .footer-title {
+            color: var(--accent-color);
+            text-align: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 3px;
+            width: 80px;
+            background: var(--accent-color);
+        }
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            list-style: none;
+            padding-left: 0;
+            width: 100%;
+        }
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            padding: 0 15px;
+            width: 50%;
+        }
+        .contact-info li:hover {
+            transform: translateY(-5px);
+        }
+        .contact-info i {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-color);
+            border-radius: 50%;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+        .contact-info li:hover i {
+            background: var(--accent-color);
+            color: var(--sidebar-bg);
+            transform: rotate(360deg);
+        }
+        .contact-info a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            word-break: break-word;
+        }
+        .contact-info a:hover {
+            color: var(--accent-color);
+        }
+        .contact-info span {
+            color: var(--secondary-color);
+        }
+
+        /* Page switching (Home/Experience) */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .page-container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding: 1.5rem;
+                padding-bottom: 1rem;
+                overflow-y: visible;
+                top: 76px;
+            }
+            .main-content {
+                max-width: 100%;
+                padding: 2rem 1rem;
+            }
+            .profile-img-container {
+                width: 130px;
+                height: 130px;
+            }
+            .card-glass {
+                margin-bottom: 1.5rem;
+            }
+            .skills-list {
+                columns: 1;
+            }
+            .section-card {
+                padding: 1.8rem;
+                margin-bottom: 2rem;
+            }
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-info li {
+                width: 100%;
+                margin-bottom: 1.2rem;
+            }
+            .footer-card-glass {
+                margin: 0 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .name-title h1, 
+            .name-title p {
+                text-align: center !important;
+            }
+        }
+
+
+        /* Additional mobile tweaks */
+        @media (max-width: 576px) {
+            .section-card {
+                padding: 1.5rem;
+            }
+            .timeline-item {
+                padding-left: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Nithin Raj Chanda</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" onclick="showPage('home')">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showPage('experience')">Experience</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-container">
+        <!-- Sidebar -->
+        <nav class="sidebar animate__animated animate__fadeInLeft">
+            <div class="profile-section animate__animated animate__fadeInDown">
+                <div class="profile-img-container">
+                    <img src="Headshot.png" alt="Profile Photo" class="profile-img">
+                </div>
+                <div class="name-title">
+                    <h1>Nithin Raj Chanda</h1>
+                    <p>MS in Computer Science</p>
+                </div>
+            </div>
+
+            <!-- Glass Card for Skills -->
+            <div class="card-glass animate__animated animate__fadeInUp">
+                <h3><i class="fas fa-laptop-code mr-2"></i>Full Stack Developer</h3>
+                <ul class="skills-list">
+                    <li>Frontend: React.js</li>
+                    <li>Backend: Node.js/Flask</li>
+                    <li>Database: MySQL</li>
+                    <li>MongoDB</li>
+                    <li>RESTful APIs</li>
+                    <li>Tailwind CSS</li>
+                    <li>Java Spring Boot</li>
+                    <li>CI/CD Pipelines</li>
+                    <li>Git/GitHub</li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Page -->
+            <div id="home" class="page active animate__animated animate__fadeIn">
+                <!-- About Me Section -->
+                <div class="section-card animate__animated animate__fadeInUp">
+                    <h2><i class="fas fa-user mr-2"></i>About Me</h2>
+                    <p class="lead">
+                        Highly motivated and results-oriented MS Computer Science student with strong technical skills 
+                        in full-stack development, machine learning, and cloud technologies. Proven track record of building 
+                        efficient solutions that reduce administrative overhead and increase operational efficiency by up to 45%. 
+                        Seeking challenging opportunities where I can leverage my technical and leadership abilities to drive innovation.
+                    </p>
+                    
+                    <div class="section-card achievement-highlight animate__animated animate__fadeInUp animate__slow">
+                        <strong><i class="fas fa-user mr-2"></i>Achievement Highlight:</strong> 
+                        <p class="mb-0">
+                            Recipient of Southern Methodist University's Best Student Employee Award 2023-24 for outstanding 
+                            contributions to university operations and academic excellence.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Education Section -->
+                <div class="section-card animate__animated animate__fadeInUp">
+                    <h2><i class="fas fa-graduation-cap mr-2"></i>Education</h2>
+                    <div class="timeline-item">
+                        <h4>Southern Methodist University</h4>
+                        <p class="text-muted">Master of Science in Computer Science (Expected May 2025)</p>
+                        <p>CGPA: 3.711/4.0</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Guru Nanak Institutions Technical Campus</h4>
+                        <p class="text-muted">Bachelor of Science in Computer Science (2023)</p>
+                        <p>CGPA: 3.56/4.0</p>
+                    </div>
+                </div>
+
+                <!-- Skills Breakdown Section -->
+                <div class="section-card animate__animated animate__fadeInUp">
+                    <h2><i class="fas fa-laptop-code mr-2"></i>Skills Breakdown</h2>
+                    
+                    <div class="mb-4">
+                        <h5>Programming Languages</h5>
+                        <div>
+                            <span class="skill-badge">Python</span>
+                            <span class="skill-badge">Java</span>
+                            <span class="skill-badge">JavaScript</span>
+                            <span class="skill-badge">R</span>
+                            <span class="skill-badge">SQL</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Web Technologies</h5>
+                        <div>
+                            <span class="skill-badge">React.js</span>
+                            <span class="skill-badge">Node.js</span>
+                            <span class="skill-badge">Flask</span>
+                            <span class="skill-badge">RESTful APIs</span>
+                            <span class="skill-badge">Tailwind CSS</span>
+                            <span class="skill-badge">Java Spring Boot</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Machine Learning</h5>
+                        <div>
+                            <span class="skill-badge">PyTorch</span>
+                            <span class="skill-badge">Keras</span>
+                            <span class="skill-badge">TensorFlow</span>
+                            <span class="skill-badge">CNN</span>
+                            <span class="skill-badge">Deep Learning</span>
+                            <span class="skill-badge">PCSANet</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Cloud and DevOps</h5>
+                        <div>
+                            <span class="skill-badge">Oracle Cloud</span>
+                            <span class="skill-badge">AWS</span>
+                            <span class="skill-badge">Git</span>
+                            <span class="skill-badge">GitHub</span>
+                            <span class="skill-badge">CI/CD</span>
+                            <span class="skill-badge">Kubernetes</span>
+                            <span class="skill-badge">Docker</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h5>Soft Skills</h5>
+                        <div>
+                            <span class="skill-badge">Technical Leadership</span>
+                            <span class="skill-badge">Project Management</span>
+                            <span class="skill-badge">Analytical Thinking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Page -->
+            <div id="experience" class="page animate__animated animate__fadeIn">
+                <!-- Professional Experience Section -->
+                <div class="section-card animate__animated animate__fadeInUp">
+                    <h2><i class="fas fa-briefcase mr-2"></i>Professional Experience</h2>
+                    <div class="timeline-item">
+                        <h4>Full Stack Developer - Our Saviour Community Garden</h4>
+                        <p class="text-muted">May 2024 - Oct 2024 | Dallas, TX</p>
+                        <ul>
+                            <li>Built the organization's first website using <strong>React.js</strong> for the frontend, <strong>Flask</strong> for the backend, and <strong>MySQL</strong> for managing content dynamically</li>
+                            <li>Implemented a secure admin portal and donation tracking system that reduced administrative tasks by <strong>20 hours per month</strong></li>
+                            <li>Launched the site on <strong>Oracle Cloud Infrastructure</strong> with robust security measures and a CI/CD pipeline for automated updates</li>
+                            <li>Increased platform reliability by <strong>35%</strong> and user activity by <strong>45%</strong>, facilitating significant donation growth</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Graduate Teaching Assistant</h4>
+                        <p class="text-muted">Jan 2024 - Present | Southern Methodist University</p>
+                        <ul>
+                            <li>Guide students through complex Operating Systems concepts including process management, memory allocation, and file systems</li>
+                            <li>Grade programming assignments focusing on C, Java and Python implementations</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h4>Teaching Assistant - Foundations of Modern Computing</h4>
+                        <p class="text-muted">Jan 2025 - Present | Southern Methodist University</p>
+                        <ul>
+                            <li>Assist students with fundamental computing concepts and programming paradigms</li>
+                            <li>Conduct weekly lab sessions to reinforce theoretical concepts with practical applications</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <h4>Machine Learning Intern - Skill Vertex</h4>
+                        <p class="text-muted">May 2022 - Aug 2022</p>
+                        <ul>
+                            <li>Built FIFA Player Analysis predictive models with <strong>85% accuracy</strong> to assess player performance</li>
+                            <li>Optimized data preprocessing by <strong>30%</strong> using Pandas and Scikit-learn</li>
+                            <li>Developed HR promotion prediction models with <strong>25%</strong> improvement in accuracy</li>
+                            <li>Automated data pipeline, increasing data ingestion speed by <strong>35%</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Projects Section -->
+                <div class="section-card animate__animated animate__fadeInUp">
+                    <h2><i class="fas fa-code-branch mr-2"></i>Technical Projects</h2>
+                    <div class="project-grid">
+                        <div class="card animate__animated animate__zoomIn">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="https://www.ijisrt.com/enhancing-thorax-disease-classification-in-chest-xray-images-through-advance-deep-learning-techniques"
+                                       target="_blank"
+                                       style="color: var(--primary-color); text-decoration: none; transition: color 0.3s ease;">
+                                       Enhancing Thorax Disease Classification
+                                    </a>
+                                </h5>
+                                <ul>
+                                    <li>Developed an advanced medical imaging classification system using <strong>PCSANet</strong></li>
+                                    <li>Built a full-stack website for chest X-ray image analysis, enabling classification across <strong>12 thorax disease categories</strong></li>
+                                    <li>Achieved <strong>63% accuracy</strong> in disease classification, improving diagnostic efficiency</li>
+                                    <li>Implemented the solution using <strong>PyTorch, JavaScript, and RESTful APIs</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="card animate__animated animate__zoomIn">
+                            <div class="card-body">
+                                <h5 class="card-title">Fruit Stage Identification Using Image Processing</h5>
+                                <ul>
+                                    <li>Engineered real-time visual processing systems using <strong>Deep CNN</strong> to analyze conveyor-belted fruits with precision levels exceeding industry standards</li>
+                                    <li>Designed and refined machine learning algorithms to analyze surface textures of fruits; achieved a <strong>20% increase in identification accuracy</strong> for oranges, apples, and bananas</li>
+                                    <li>Created comprehensive documentation demonstrating enhanced staging efficiency</li>
+                                    <li>Implemented real-time processing capabilities for continuous fruit quality monitoring in production environments</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Leadership & Activities Section -->
+                <div class="section-card animate__animated animate__fadeInUp">
+                    <h2><i class="fas fa-users mr-2"></i>Leadership & Activities</h2>
+                    <div class="timeline-item">
+                        <h4>Mustang Band Drumline Member</h4>
+                        <p class="text-muted">Aug 2024 - Present</p>
+                        <ul>
+                            <li>Perform at Southern Methodist University athletic events, elevating team spirit through dynamic performances</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Interfaith Fellow, Office of Chaplain and Religious Life</h4>
+                        <p class="text-muted">Aug 2023 - Present</p>
+                        <ul>
+                            <li>Lead and organize cultural festivals celebrating diversity</li>
+                            <li>Facilitate interfaith dialogue and community building initiatives</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>Computer Science Club</h4>
+                        <p class="text-muted">Feb 2024 - Present</p>
+                        <ul>
+                            <li>Part of a team developing website for health analytics</li>
+                            <li>Implementing predictive models for disease analysis through data mining projects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="animate__animated animate__fadeInUp">
+        <div class="footer-card-glass">
+            <h2 class="footer-title">Contact Me</h2>
+            <ul class="contact-info">
+                <li>
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:chandanithinraj@gmail.com">chandanithinraj@gmail.com</a>
+                </li>
+                <li>
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+1 9455461633">+1 (945) 546-1633</a>
+                </li>
+                <li>
+                    <i class="fab fa-linkedin"></i>
+                    <a href="https://www.linkedin.com/in/nithinrajchanda/" target="_blank">Linkedin</a>
+                </li>
+                <li>
+                    <i class="fab fa-github"></i>
+                    <a href="https://github.com/nithinrajchanda" target="_blank">GitHub</a>
+                </li>
+                <li>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Dallas, Texas</span>
+                </li>
+                <li>
+                    <i class="fas fa-file-alt"></i>
+                    <a href="nithin.pdf" target="_blank">Resume</a>
+                </li>
+            </ul>
+
+            <div class="text-center mt-4">
+                <p>&copy; 2025 Nithin Raj Chanda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for page transitions and navbar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Animate.css does not auto-trigger on scroll, but triggers on page load. 
+         For on-scroll animations, consider using a library like AOS or an intersection observer approach. -->
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            // Find and set active link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('onclick') && link.getAttribute('onclick').includes(pageId)) {
+                    link.classList.add('active');
+                }
+            });
+            
+            // Close navbar on mobile if open
+            if (window.innerWidth < 992) {
+                $('.navbar-collapse').collapse('hide');
+            }
+        }
+        
+        // Smooth scrolling (internal anchor links)
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^=\"#\"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    // If the link is for JS navigation, skip scroll
+                    if (!this.getAttribute('onclick')) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
